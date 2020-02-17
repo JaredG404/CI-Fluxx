@@ -1,4 +1,6 @@
 # CI-Fluxx
 comp 350 project
 
-Cristian Aguilar
+## Cristian Aguilar
+## Michael Curry
+## Jared Gassman
