@@ -1,5 +1,6 @@
 # CI-Fluxx
 comp 350 project
-## Ferid Ruano
+## Cristian Aguilar
 ## Michael Curry
 ## Jared Gassman
+## Ferid Ruano
