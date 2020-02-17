@@ -1,3 +1,6 @@
 # CI-Fluxx
 comp 350 project
-# William Kempema
+## Ferid Ruano
+## Michael Curry
+## Jared Gassman
+## William Kempema
