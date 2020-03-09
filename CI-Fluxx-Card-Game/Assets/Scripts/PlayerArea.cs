@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerArea : ScriptableObject
+public class PlayerArea : MonoBehaviour
 {
     public Keeper[] keepersPlayed;
     public Card[] playerHand;

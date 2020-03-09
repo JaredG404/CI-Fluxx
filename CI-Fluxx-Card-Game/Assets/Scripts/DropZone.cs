@@ -4,19 +4,19 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-public class DropZoneKeepers : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
+public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Draggable.areas typeOfArea = Draggable.areas.DECK;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(eventData.pointerDrag == null)
+        if (eventData.pointerDrag == null)
         {
             return;
         }
 
         Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
-        if(draggable != null)
+        if (draggable != null)
         {
             draggable.placeHolderParent = this.transform;
         }
@@ -24,7 +24,7 @@ public class DropZoneKeepers : MonoBehaviour, IDropHandler, IPointerEnterHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if(eventData.pointerDrag == null)
+        if (eventData.pointerDrag == null)
         {
             return;
         }
@@ -39,15 +39,15 @@ public class DropZoneKeepers : MonoBehaviour, IDropHandler, IPointerEnterHandler
     public void OnDrop(PointerEventData eventData)
     {
         Draggable draggable = eventData.pointerDrag.GetComponent<Draggable>();
-        if(draggable != null)
+        if (draggable != null)
         {
             // draggable.parentToReturnTo = this.transform;
 
-            if(typeOfArea == draggable.typeOfArea)
+            if (typeOfArea == draggable.typeOfArea)
             {
                 draggable.parentToReturnTo = this.transform;
             }
-        
+
         }
     }
 }

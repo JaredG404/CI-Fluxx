@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8530776123473755557}
   - component: {fileID: 1334860832472192774}
   - component: {fileID: 4405941778830109408}
-  - component: {fileID: 7285014459059619791}
   - component: {fileID: 1297242497112505383}
+  - component: {fileID: 7159357201410295098}
   m_Layer: 5
   m_Name: KeeperArea
   m_TagString: Untagged
@@ -75,18 +75,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7285014459059619791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8866308496378376059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aa380fa60aa347428b088d11ffb1cbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1297242497112505383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,3 +100,16 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &7159357201410295098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8866308496378376059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4ec75f99404846bd99257b9c15bd472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeOfArea: 0
