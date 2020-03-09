@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7793125177968186578}
   - component: {fileID: 7211255015046322862}
   - component: {fileID: 2926565493089029246}
+  - component: {fileID: 7466407929217156983}
   m_Layer: 5
   m_Name: PlayerHand
   m_TagString: Untagged
@@ -113,3 +114,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typeOfArea: 1
+--- !u!114 &7466407929217156983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8948040945679729384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb2b84d3e06c44aca882a3c410142a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keepersPlayed: []
+  playerHand: []
+  playerId: 0
+  HAND_LIMIT: 10
