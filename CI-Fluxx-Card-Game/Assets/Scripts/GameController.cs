@@ -15,8 +15,6 @@ public class GameController : MonoBehaviour
     void Start()
     {
         InstanceCard();
-//comment this pls
-
     }
 
     // Update is called once per frame
@@ -45,7 +43,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator SplitCards()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(0.5f);
             int rdPlayer = Random.Range(0,listCard.Count-1);
@@ -72,8 +70,6 @@ public class GameController : MonoBehaviour
         }
         yield return new WaitForSeconds(0.5f);
         listGoal[0].transform.SetParent(transform_Goal, false);
-        //iTween.MoveTo(listCard[0], iTween.Hash("position", transform_Goal.position, "easeType", "Linear", "loopType", "none", "time", 0.4f));
-        //yield return new WaitForSeconds(0.25f);
         listGoal[0].GetComponent<UICards>().gob_FrontCard.SetActive(false);
 
     }
