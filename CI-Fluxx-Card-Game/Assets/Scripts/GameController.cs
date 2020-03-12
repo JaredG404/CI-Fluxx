@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator SplitCards()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             yield return new WaitForSeconds(0.5f);
             int rdPlayer = Random.Range(0,listCard.Count-1);
