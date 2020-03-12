@@ -5,9 +5,10 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject cards;
-    public Transform transform_boxCard;
+    public Transform transform_Deck, transform_Goal;
     public Transform[] PlayerHand, AIHand;
     public List<GameObject> listCard = new List<GameObject>(32);
+    public List<GameObject> listGoal;
     public List<GameObject> playerHand_Cards;
     public List<GameObject> AIHand_Cards;
     // Start is called before the first frame update
@@ -27,10 +28,17 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < LoadDeck.instance.deckArr.Length; i++)
         {
-            GameObject _cards = Instantiate(cards, transform_boxCard.position, Quaternion.identity);
-            _cards.transform.SetParent(transform_boxCard, false);
+            GameObject _cards = Instantiate(cards, transform_Deck.position, Quaternion.identity);
+            _cards.transform.SetParent(transform_Deck, false);
             _cards.GetComponent<UICards>().image_cards.sprite = LoadDeck.instance.deckArr[i];
             listCard.Add(_cards);
+        }
+        for (int i = 0; i < LoadDeck.instance.goalArr.Length; i++)
+        {
+            GameObject _goals = Instantiate(cards, transform_Goal.position, Quaternion.identity);
+            //_goals.transform.SetParent(transform_Goal, false);
+            _goals.GetComponent<UICards>().image_cards.sprite = LoadDeck.instance.goalArr[i];
+            listGoal.Add(_goals);
         }
         StartCoroutine(SplitCards());
     }
@@ -62,5 +70,11 @@ public class GameController : MonoBehaviour
             AIHand_Cards.Add(listCard[rdAI]);
             listCard.RemoveAt(rdAI);
         }
+        yield return new WaitForSeconds(0.5f);
+        listGoal[0].transform.SetParent(transform_Goal, false);
+        //iTween.MoveTo(listCard[0], iTween.Hash("position", transform_Goal.position, "easeType", "Linear", "loopType", "none", "time", 0.4f));
+        //yield return new WaitForSeconds(0.25f);
+        listGoal[0].GetComponent<UICards>().gob_FrontCard.SetActive(false);
+
     }
 }

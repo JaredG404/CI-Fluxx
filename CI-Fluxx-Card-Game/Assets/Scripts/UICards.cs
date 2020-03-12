@@ -19,6 +19,17 @@ public class UICards : MonoBehaviour
     void Start()
     {
         Name = image_cards.sprite.name;
+        int index = Name.IndexOf("-");
+        string str = Name.Substring(0, index);
+        Debug.Log(str);
+        if(string.Compare(str, "keeper") == 0)
+        {
+            type = CardType.KEEPER;
+        }
+        else
+        {
+            type = CardType.GOALS;
+        }
     }
 
     // Update is called once per frame

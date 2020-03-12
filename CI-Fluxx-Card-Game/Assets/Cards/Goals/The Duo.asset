@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bbe1f0ced06744afa9f26387a0e482b, type: 3}
+  m_Name: The Duo
+  m_EditorClassIdentifier: 
+  name: The Duo
+  description: 'A player wins the game by having the following two cards: Anna Bieszczad
+    and Andrzej Bieszczad'
+  type: 2
+  icon: {fileID: 21300000, guid: 75a1a1996bb542677b45b5554f0834ba, type: 3}
+  avatar: {fileID: 21300000, guid: 056cb1d66b909b449b7e902cadb7167e, type: 3}
+  keepers:
+  - Andrzej Bieszczad
+  - Anna Bieszczad

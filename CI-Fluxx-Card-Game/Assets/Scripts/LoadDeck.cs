@@ -6,6 +6,7 @@ public class LoadDeck : MonoBehaviour
 {
     public static LoadDeck instance;
     public Sprite[] deckArr;
+    public Sprite[] goalArr;
     // Start is called before the first frame update
     void Start()
     {
