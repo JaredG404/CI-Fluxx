@@ -37,4 +37,13 @@ public class UICards : MonoBehaviour
     {
         
     }
+    public bool isGoal()
+    {
+        if(type == CardType.KEEPER)
+        {
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

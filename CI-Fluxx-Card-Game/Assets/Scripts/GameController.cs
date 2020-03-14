@@ -64,7 +64,7 @@ public class GameController : MonoBehaviour
             iTween.MoveTo(listCard[rdAI], iTween.Hash("position", AIHand[i].position, "easeType", "Linear", "loopType", "none", "time", 0.4f));
             iTween.RotateBy(listCard[rdAI], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.4f));
             yield return new WaitForSeconds(0.25f);
-            listCard[rdAI].GetComponent<UICards>().gob_FrontCard.SetActive(false);
+            listCard[rdAI].GetComponent<UICards>().gob_FrontCard.SetActive(true);
             AIHand_Cards.Add(listCard[rdAI]);
             listCard.RemoveAt(rdAI);
         }

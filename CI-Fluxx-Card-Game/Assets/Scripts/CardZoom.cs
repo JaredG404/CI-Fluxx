@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CardZoom : MonoBehaviour
 {
-
     public GameObject Canvas;
     private GameObject zoomCard;
     public void Awake()
@@ -14,12 +13,30 @@ public class CardZoom : MonoBehaviour
 
     public void OnHoverEnter()
     {
-        zoomCard = Instantiate(gameObject, new Vector2(Input.mousePosition.x - 450, Input.mousePosition.y - 200), Quaternion.identity);
-        zoomCard.transform.SetParent(Canvas.transform, false);
-        zoomCard.transform.localScale = new Vector2(2,2);
-        zoomCard.transform.Rotate(0, 180, 0);
-        RectTransform rect = zoomCard.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(240, 344);
+        //Debug.Log(Input.mousePosition.x);
+        if(gameObject.GetComponent<UICards>().gob_FrontCard.activeSelf == true)
+        {
+            Debug.Log("This card is flipped over and can't zoom");
+        }
+        else{
+            zoomCard = Instantiate(gameObject);
+            zoomCard.transform.SetParent(Canvas.transform, false);
+            if(zoomCard.GetComponent<UICards>().isGoal() == true)
+            {
+                Debug.Log("goal herer mate");
+                zoomCard.transform.Rotate(0,180,0);
+                zoomCard.transform.localPosition = new Vector2(300, 0);
+                zoomCard.transform.localScale = new Vector2(3,3);
+            }
+            else
+            {
+                zoomCard.transform.localScale = new Vector2(3,3);
+                zoomCard.transform.localPosition = new Vector2(Input.mousePosition.x - 550, Input.mousePosition.y - 100);
+            }
+            RectTransform rect = zoomCard.GetComponent<RectTransform>();
+            rect.sizeDelta = new Vector2(360, 531);
+        }
+        
     }
 
     public void OnHoverExit()
