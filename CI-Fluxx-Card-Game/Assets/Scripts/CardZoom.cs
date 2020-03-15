@@ -26,7 +26,7 @@ public class CardZoom : MonoBehaviour
                 Debug.Log("goal herer mate");
                 zoomCard.transform.Rotate(0,180,0);
                 zoomCard.transform.localPosition = new Vector2(300, 0);
-                zoomCard.transform.localScale = new Vector2(3,3);
+                zoomCard.transform.localScale = new Vector2(2,2);
             }
             else
             {
