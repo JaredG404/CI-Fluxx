@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 09ed6f4c45397fb0ca4dee4ea0d498f0
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Trebuchet MS SC
+  fontNames:
+  - Trebuchet MS SC
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5577c30d1c3905b46b001f762f99347f, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
