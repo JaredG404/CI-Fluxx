@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     public List<GameObject> listGoal;
     public List<GameObject> playerHand_Cards;
     public List<GameObject> AIHand_Cards;
+    public GameObject playerZone;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,14 +44,14 @@ public class GameController : MonoBehaviour
 
     IEnumerator SplitCards()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
             yield return new WaitForSeconds(0.5f);
             int rdPlayer = Random.Range(0,listCard.Count-1);
-            listCard[rdPlayer].transform.SetParent(PlayerHand[i], true);
-            iTween.MoveTo(listCard[rdPlayer], iTween.Hash("position", PlayerHand[i].position, "easeType", "Linear", "loopType", "none", "time", 0.4f));
-            iTween.RotateBy(listCard[rdPlayer], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.4f));
-            yield return new WaitForSeconds(0.25f);
+            listCard[rdPlayer].transform.SetParent(playerZone.transform, true);
+            //iTween.MoveTo(listCard[rdPlayer], iTween.Hash("position", playerZone, "easeType", "Linear", "loopType", "none", "time", 0.2f));
+            iTween.RotateBy(listCard[rdPlayer], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.2f));
+            //yield return new WaitForSeconds(0.25f);
             listCard[rdPlayer].GetComponent<UICards>().gob_FrontCard.SetActive(false);
             playerHand_Cards.Add(listCard[rdPlayer]);
             listCard.RemoveAt(rdPlayer);
