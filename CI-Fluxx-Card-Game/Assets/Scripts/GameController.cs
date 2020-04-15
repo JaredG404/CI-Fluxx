@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public List<GameObject> playerHand_Cards;
     public List<GameObject> AIHand_Cards;
     public GameObject playerZone;
+    public GameObject enemyZone;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +36,6 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < LoadDeck.instance.goalArr.Length; i++)
         {
             GameObject _goals = Instantiate(cards, transform_Goal.position, Quaternion.identity);
-            //_goals.transform.SetParent(transform_Goal, false);
             _goals.GetComponent<UICards>().image_cards.sprite = LoadDeck.instance.goalArr[i];
             listGoal.Add(_goals);
         }
@@ -44,12 +44,12 @@ public class GameController : MonoBehaviour
 
     IEnumerator SplitCards()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             yield return new WaitForSeconds(0.5f);
             int rdPlayer = Random.Range(0,listCard.Count-1);
             listCard[rdPlayer].transform.SetParent(playerZone.transform, true);
-            //iTween.MoveTo(listCard[rdPlayer], iTween.Hash("position", playerZone, "easeType", "Linear", "loopType", "none", "time", 0.2f));
+            //iTween.MoveTo(listCard[rdPlayer], iTween.Hash("position", playerZone, "easeType", "Linear", "loopType", "none", "time", 0.9f));
             iTween.RotateBy(listCard[rdPlayer], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.2f));
             //yield return new WaitForSeconds(0.25f);
             listCard[rdPlayer].GetComponent<UICards>().gob_FrontCard.SetActive(false);
@@ -61,11 +61,11 @@ public class GameController : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
             int rdAI = Random.Range(0,listCard.Count-1);
-            listCard[rdAI].transform.SetParent(AIHand[i], true);
-            iTween.MoveTo(listCard[rdAI], iTween.Hash("position", AIHand[i].position, "easeType", "Linear", "loopType", "none", "time", 0.4f));
-            //iTween.RotateBy(listCard[rdAI], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.4f));
+            listCard[rdAI].transform.SetParent(enemyZone.transform, true);
+            //iTween.MoveTo(listCard[rdAI], iTween.Hash("position", enemyZone, "easeType", "Linear", "loopType", "none", "time", 0.4f));
+            iTween.RotateBy(listCard[rdAI], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.4f));
             yield return new WaitForSeconds(0.25f);
-            listCard[rdAI].GetComponent<UICards>().gob_FrontCard.SetActive(true);
+            listCard[rdAI].GetComponent<UICards>().gob_FrontCard.SetActive(false);
             AIHand_Cards.Add(listCard[rdAI]);
             listCard.RemoveAt(rdAI);
         }

@@ -35,8 +35,16 @@ public class CardDrag : MonoBehaviour
 
     void OnMouseDown()
  {
-     screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-     offset =  this.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,screenPoint.z));
+    //  screenPoint = Camera.main.WorldToScreenPoint(transform.position);
+    //  offset =  this.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,screenPoint.z));
+
+        Vector3 scanPos = gameObject.transform.position;
+         screenPoint = Camera.main.WorldToScreenPoint(scanPos);
+         //Debug.Log (Input.mousePosition.x);
+         
+         
+         offset = scanPos - Camera.main.ScreenToWorldPoint(
+         new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
  }
 
  void OnMouseDrag()
