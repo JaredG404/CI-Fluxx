@@ -551,7 +551,7 @@ PrefabInstance:
     - target: {fileID: 5999759979164912450, guid: be494bf331cd583bfbed27feb64879f2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 798
+      value: 776
       objectReference: {fileID: 0}
     - target: {fileID: 5999759979683650114, guid: be494bf331cd583bfbed27feb64879f2,
         type: 3}
@@ -1088,6 +1088,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1229038913}
+  - {fileID: 2011614385}
   m_Father: {fileID: 2109073260}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1772,6 +1773,79 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Panel: {fileID: 35648685}
+--- !u!1 &1106339611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1106339612}
+  - component: {fileID: 1106339614}
+  - component: {fileID: 1106339613}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1106339612
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106339611}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2080704732}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 8.1, y: 168.8}
+  m_SizeDelta: {x: 325.8, y: 337.6}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1106339613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106339611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8d7ef8afcaad25148bbe80d7e6b12505, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1106339614
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106339611}
+  m_CullTransparentMesh: 0
 --- !u!1 &1229038912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,8 +1880,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.014901, y: -0.00021362}
-  m_SizeDelta: {x: 1351.7, y: 707.54}
+  m_AnchoredPosition: {x: 4.7, y: -164}
+  m_SizeDelta: {x: 1361.1, y: 578.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1229038914
 MonoBehaviour:
@@ -1842,12 +1916,10 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'The rules start with play 1 and draw 1. These rules can be changed by
     playing another card that has rules written on it. Those new rules are how you
-    will play from then on. Certain action cards may reset the rules too.
+    will play from then on. Certain action cards may reset the rules to default as
+    seen above.
 
-
-
-    Click
-    Rules to close this box'
+    Click Rules to close this box'
 --- !u!222 &1229038915
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2568,8 +2640,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.014901, y: -0.00021362}
-  m_SizeDelta: {x: 1351.7, y: 707.54}
+  m_AnchoredPosition: {x: 0.014902, y: -166.8}
+  m_SizeDelta: {x: 1351.7, y: 373.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1952109232
 MonoBehaviour:
@@ -2602,10 +2674,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Action cards allow you to influence your hand, another players, hand,
-    both of those, or the board. Such actions like clear rules, steal cards, take
-    more from the deck come from these cards. \n\n\n\nClick Actions to close this
-    box"
+  m_Text: "Action cards allow you to influence your hand, another players hand, both
+    of those, or the board. Such actions like clear rules, steal cards, take more
+    from the deck come from these cards. \nClick Actions to close this box"
 --- !u!222 &1952109233
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2691,6 +2762,79 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1966805954}
+  m_CullTransparentMesh: 0
+--- !u!1 &2011614384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2011614385}
+  - component: {fileID: 2011614387}
+  - component: {fileID: 2011614386}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2011614385
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011614384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 569554233}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0000095367, y: 182}
+  m_SizeDelta: {x: 253.5, y: 309.3}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2011614386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011614384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2e00410309389c04b86d22d631712e83, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2011614387
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011614384}
   m_CullTransparentMesh: 0
 --- !u!1 &2026067130
 GameObject:
@@ -2865,6 +3009,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1952109231}
+  - {fileID: 1106339612}
   m_Father: {fileID: 2109073260}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
