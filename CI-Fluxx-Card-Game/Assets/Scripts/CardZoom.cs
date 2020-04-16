@@ -49,7 +49,9 @@ public class CardZoom : MonoBehaviour
 
     public void clicked()
     {
-        gameObject.transform.SetParent(keeperArea.transform, false);
-        Debug.Log("it works mate");
+        if(gameObject.GetComponent<UICards>().isKeeper())
+        {
+            gameObject.transform.SetParent(keeperArea.transform, false);
+        }
     }
 }
