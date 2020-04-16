@@ -5,10 +5,12 @@ using UnityEngine;
 public class CardZoom : MonoBehaviour
 {
     public GameObject Canvas;
+    public GameObject keeperArea;
     private GameObject zoomCard;
     public void Awake()
     {
         Canvas = GameObject.Find("Canvas");
+        keeperArea = GameObject.Find("Keepers");
     }
 
     public void OnHoverEnter()
@@ -43,5 +45,13 @@ public class CardZoom : MonoBehaviour
     {
         Destroy(zoomCard);
         Debug.Log("zoom destroyed");
+    }
+
+    public void clicked()
+    {
+        if(gameObject.GetComponent<UICards>().isKeeper())
+        {
+            gameObject.transform.SetParent(keeperArea.transform, false);
+        }
     }
 }
