@@ -8,13 +8,16 @@ public class UICards : MonoBehaviour
     public enum CardType
     {
         KEEPER,
-        GOALS
-
+        GOALS,
+        RULE
     }
     public Image image_cards;
     public GameObject gob_FrontCard;
     public CardType type;
     public string Name;
+    public string keepersNeededforGoal1;
+    public string keepersNeededforGoal2; 
+    public bool isThisCardYours = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +29,15 @@ public class UICards : MonoBehaviour
         {
             type = CardType.KEEPER;
         }
-        else
+        else if(string.Compare(str, "goal") == 0)
         {
             type = CardType.GOALS;
         }
+        else
+        {
+            type = CardType.RULE;
+        }
+        KeepersForTheGoal();
     }
 
     // Update is called once per frame
@@ -54,5 +62,38 @@ public class UICards : MonoBehaviour
         }else{
             return false;
         }
+    }
+    public bool isRule()
+    {
+        if(type == CardType.RULE)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public void KeepersForTheGoal()
+    {
+        if(isGoal())
+        {
+            if(string.Compare(Name, "goal-The Duo") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-AJ Bieszczad";
+                keepersNeededforGoal2 = "keeper-Anna";
+            }
+        }
+    }
+    public string getName()
+    {
+        return Name;
+    }
+
+    public bool CheckIfThisCardIsYours()
+    {
+        return isThisCardYours;
+    }
+    public void SetIsThisCardYours(bool x)
+    {
+        isThisCardYours = x;
     }
 }

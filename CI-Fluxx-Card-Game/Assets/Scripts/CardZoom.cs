@@ -6,11 +6,13 @@ public class CardZoom : MonoBehaviour
 {
     public GameObject Canvas;
     public GameObject keeperArea;
+    public GameObject enemyKeeperArea;
     private GameObject zoomCard;
     public void Awake()
     {
         Canvas = GameObject.Find("Canvas");
         keeperArea = GameObject.Find("Keepers");
+        enemyKeeperArea = GameObject.Find("Enemy Keepers");
     }
 
     public void OnHoverEnter()
@@ -23,7 +25,7 @@ public class CardZoom : MonoBehaviour
         else{
             zoomCard = Instantiate(gameObject);
             zoomCard.transform.SetParent(Canvas.transform, false);
-            if(zoomCard.GetComponent<UICards>().isGoal() == true)
+            if(zoomCard.GetComponent<UICards>().isGoal() == true || zoomCard.GetComponent<UICards>().isRule() == true)
             {
                 Debug.Log("goal herer mate");
                 zoomCard.transform.Rotate(0,180,0);
@@ -49,9 +51,13 @@ public class CardZoom : MonoBehaviour
 
     public void clicked()
     {
-        if(gameObject.GetComponent<UICards>().isKeeper())
+        if(gameObject.GetComponent<UICards>().isKeeper() && gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
         {
             gameObject.transform.SetParent(keeperArea.transform, false);
+        }
+        if(gameObject.GetComponent<UICards>().isKeeper() && !gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
+        {
+            gameObject.transform.SetParent(enemyKeeperArea.transform, false);
         }
     }
 }
