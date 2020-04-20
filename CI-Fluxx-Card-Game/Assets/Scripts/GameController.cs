@@ -5,9 +5,10 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject cards;
-    public Transform transform_Deck, transform_Goal;
+    public Transform transform_Deck, transform_Goal, transform_Rules;
     public List<GameObject> listCard = new List<GameObject>(32);
     public List<GameObject> listGoal;
+    public List<GameObject> Rules;
     public GameObject playerZone;
     public GameObject enemyZone;
     public GameObject keeperArea;
@@ -69,6 +70,11 @@ public class GameController : MonoBehaviour
             _goals.GetComponent<UICards>().image_cards.sprite = LoadDeck.instance.goalArr[i];
             listGoal.Add(_goals);
         }
+        
+        GameObject _rules = Instantiate(cards, transform_Rules.position, Quaternion.identity);
+        _rules.GetComponent<UICards>().image_cards.sprite = LoadDeck.instance.basicRules;
+        Rules.Add(_rules);
+
         StartCoroutine(SplitCards());
     }
 
@@ -101,6 +107,11 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         listGoal[0].transform.SetParent(transform_Goal, false);
         listGoal[0].GetComponent<UICards>().gob_FrontCard.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+        Rules[0].transform.SetParent(transform_Rules, false);
+        Rules[0].GetComponent<UICards>().gob_FrontCard.SetActive(false);
+
 
     }
     public void CheckIfGoalIsMet()

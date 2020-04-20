@@ -8,8 +8,8 @@ public class UICards : MonoBehaviour
     public enum CardType
     {
         KEEPER,
-        GOALS
-
+        GOALS,
+        RULE
     }
     public Image image_cards;
     public GameObject gob_FrontCard;
@@ -29,9 +29,13 @@ public class UICards : MonoBehaviour
         {
             type = CardType.KEEPER;
         }
-        else
+        else if(string.Compare(str, "goal") == 0)
         {
             type = CardType.GOALS;
+        }
+        else
+        {
+            type = CardType.RULE;
         }
         KeepersForTheGoal();
     }
@@ -53,6 +57,15 @@ public class UICards : MonoBehaviour
     public bool isKeeper()
     {
         if(type == CardType.KEEPER)
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public bool isRule()
+    {
+        if(type == CardType.RULE)
         {
             return true;
         }else{

@@ -25,7 +25,7 @@ public class CardZoom : MonoBehaviour
         else{
             zoomCard = Instantiate(gameObject);
             zoomCard.transform.SetParent(Canvas.transform, false);
-            if(zoomCard.GetComponent<UICards>().isGoal() == true)
+            if(zoomCard.GetComponent<UICards>().isGoal() == true || zoomCard.GetComponent<UICards>().isRule() == true)
             {
                 Debug.Log("goal herer mate");
                 zoomCard.transform.Rotate(0,180,0);
