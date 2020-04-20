@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -132,6 +133,7 @@ public class GameController : MonoBehaviour
                 goalMeet = false;
                 gameOver = true;
                 GameOverUI.SetActive(true);
+                StartCoroutine(waiter());
             }
         }
     }
@@ -153,9 +155,18 @@ public class GameController : MonoBehaviour
                 Debug.Log("enemey won");
                 gameOver = true;
                 GameOverLoseUI.SetActive(true);
+                StartCoroutine(waiter());
+                
             }
         }
     }
+
+    public IEnumerator waiter()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void drawCards(int cardsToDraw)
     {
 
