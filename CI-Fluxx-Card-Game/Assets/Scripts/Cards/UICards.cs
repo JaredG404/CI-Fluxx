@@ -16,7 +16,10 @@ public class UICards : MonoBehaviour
     public CardType type;
     public string Name;
     public string keepersNeededforGoal1;
-    public string keepersNeededforGoal2; 
+    public string keepersNeededforGoal2;
+    public string keepersNeededforGoal3;
+    public string keepersNeededforGoal4;
+    public string keepersNeededforGoal5;
     public bool isThisCardYours = false;
     // Start is called before the first frame update
     void Start()
@@ -76,10 +79,63 @@ public class UICards : MonoBehaviour
     {
         if(isGoal())
         {
-            if(string.Compare(Name, "goal-The Duo") == 0)
+            if(string.Compare(Name, "The Duo") == 0)
             {
-                keepersNeededforGoal1 = "keeper-AJ Bieszczad";
-                keepersNeededforGoal2 = "keeper-Anna";
+                keepersNeededforGoal1 = "AJBieszczad";
+                keepersNeededforGoal2 = "AnnaBieszczad";
+            }
+            if(string.Compare(Name, "AnotherDayOnTheJob") == 0)
+            {
+                keepersNeededforGoal1 = "Marker";
+                keepersNeededforGoal2 = "Nick";
+            }
+            if(string.Compare(Name, "BoredProblems") == 0)
+            {
+                keepersNeededforGoal1 = "Marker";
+                keepersNeededforGoal2 = "AJ";
+            }
+            if(string.Compare(Name, "DinnerTime") == 0)
+            {
+                keepersNeededforGoal1 = "Pizza";
+                keepersNeededforGoal2 = "Radish";
+            }
+            if(string.Compare(Name, "Graduation") == 0)
+            {
+                // problems adding multiple teachers for goal
+                // Right now only accepts diploma and AJ
+                keepersNeededforGoal1 = "Diploma";
+                keepersNeededforGoal2 = "AJBieszczad";
+                keepersNeededforGoal3 = "AnnaBieszczad";
+                keepersNeededforGoal4 = "Nick";
+                keepersNeededforGoal5 = "Ryan";
+            }
+            if(string.Compare(Name, "GraduationParty") == 0)
+            {
+                keepersNeededforGoal1 = "Diploma";
+                keepersNeededforGoal2 = "Pizza";
+            }
+            if(string.Compare(Name, "LunchBreak") == 0)
+            {
+                // problems adding multiple teachers for goal
+                // Right now only accepts pizza and Ryan 
+                keepersNeededforGoal1 = "Pizza";
+                keepersNeededforGoal2 = "Ryan";
+                keepersNeededforGoal3 = "Nick";
+            }
+            if(string.Compare(Name, "StructuredLearning") == 0)
+            {
+                keepersNeededforGoal1 = "Marker";
+                keepersNeededforGoal2 = "AnnaBieszczad";
+            }
+            if(string.Compare(Name, "Vandalism") == 0)
+            {
+                keepersNeededforGoal1 = "Radish";
+                keepersNeededforGoal2 = "Nick";
+            }
+            if(string.Compare(Name, "WaitHowOldAreYou") == 0)
+            {
+                keepersNeededforGoal1 = "Ryan";
+                keepersNeededforGoal2 = "Nick";
             }
         }
     }
