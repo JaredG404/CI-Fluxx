@@ -127,7 +127,10 @@ public class GameController : MonoBehaviour
             {
                 goalMeet = true;
             }
-            if(string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal2, keeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0)
+            if(string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal2, keeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0
+                || string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal3, keeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0
+                || string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal4, keeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0
+                || string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal5, keeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0)
             {
                 goalMeet2 = true;
             }

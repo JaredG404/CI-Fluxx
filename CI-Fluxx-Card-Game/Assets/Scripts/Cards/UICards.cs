@@ -101,8 +101,6 @@ public class UICards : MonoBehaviour
             }
             if(string.Compare(Name, "Graduation") == 0)
             {
-                // problems adding multiple teachers for goal
-                // Right now only accepts diploma and AJ
                 keepersNeededforGoal1 = "Diploma";
                 keepersNeededforGoal2 = "AJBieszczad";
                 keepersNeededforGoal3 = "AnnaBieszczad";
@@ -116,8 +114,6 @@ public class UICards : MonoBehaviour
             }
             if(string.Compare(Name, "LunchBreak") == 0)
             {
-                // problems adding multiple teachers for goal
-                // Right now only accepts pizza and Ryan 
                 keepersNeededforGoal1 = "Pizza";
                 keepersNeededforGoal2 = "Ryan";
                 keepersNeededforGoal3 = "Nick";
