@@ -79,59 +79,59 @@ public class UICards : MonoBehaviour
     {
         if(isGoal())
         {
-            if(string.Compare(Name, "The Duo") == 0)
+            if(string.Compare(Name, "goal-TheDuo") == 0)
             {
-                keepersNeededforGoal1 = "AJBieszczad";
-                keepersNeededforGoal2 = "AnnaBieszczad";
+                keepersNeededforGoal1 = "keeper-AJBieszczad";
+                keepersNeededforGoal2 = "keeper-AnnaBieszczad";
             }
-            if(string.Compare(Name, "AnotherDayOnTheJob") == 0)
+            if(string.Compare(Name, "goal-AnotherDayOnTheJob") == 0)
             {
-                keepersNeededforGoal1 = "Marker";
-                keepersNeededforGoal2 = "Nick";
+                keepersNeededforGoal1 = "keeper-Marker";
+                keepersNeededforGoal2 = "keeper-Nick";
             }
-            if(string.Compare(Name, "BoredProblems") == 0)
+            if(string.Compare(Name, "goal-BoredProblems") == 0)
             {
-                keepersNeededforGoal1 = "Marker";
-                keepersNeededforGoal2 = "AJ";
+                keepersNeededforGoal1 = "keeper-Marker";
+                keepersNeededforGoal2 = "keeper-AJ";
             }
-            if(string.Compare(Name, "DinnerTime") == 0)
+            if(string.Compare(Name, "goal-DinnerTime") == 0)
             {
-                keepersNeededforGoal1 = "Pizza";
-                keepersNeededforGoal2 = "Radish";
+                keepersNeededforGoal1 = "keeper-Pizza";
+                keepersNeededforGoal2 = "keeper-Radish";
             }
-            if(string.Compare(Name, "Graduation") == 0)
+            if(string.Compare(Name, "goal-Graduation") == 0)
             {
-                keepersNeededforGoal1 = "Diploma";
-                keepersNeededforGoal2 = "AJBieszczad";
-                keepersNeededforGoal3 = "AnnaBieszczad";
-                keepersNeededforGoal4 = "Nick";
-                keepersNeededforGoal5 = "Ryan";
+                keepersNeededforGoal1 = "keeper-Diploma";
+                keepersNeededforGoal2 = "keeper-AJBieszczad";
+                keepersNeededforGoal3 = "keeper-AnnaBieszczad";
+                keepersNeededforGoal4 = "keeper-Nick";
+                keepersNeededforGoal5 = "keeper-Ryan";
             }
-            if(string.Compare(Name, "GraduationParty") == 0)
+            if(string.Compare(Name, "goal-GraduationParty") == 0)
             {
-                keepersNeededforGoal1 = "Diploma";
-                keepersNeededforGoal2 = "Pizza";
+                keepersNeededforGoal1 = "keeper-Diploma";
+                keepersNeededforGoal2 = "keeper-Pizza";
             }
-            if(string.Compare(Name, "LunchBreak") == 0)
+            if(string.Compare(Name, "goal-LunchBreak") == 0)
             {
-                keepersNeededforGoal1 = "Pizza";
-                keepersNeededforGoal2 = "Ryan";
-                keepersNeededforGoal3 = "Nick";
+                keepersNeededforGoal1 = "keeper-Pizza";
+                keepersNeededforGoal2 = "keeper-Ryan";
+                keepersNeededforGoal3 = "keeper-Nick";
             }
-            if(string.Compare(Name, "StructuredLearning") == 0)
+            if(string.Compare(Name, "goal-StructuredLearning") == 0)
             {
-                keepersNeededforGoal1 = "Marker";
-                keepersNeededforGoal2 = "AnnaBieszczad";
+                keepersNeededforGoal1 = "keeper-Marker";
+                keepersNeededforGoal2 = "keeper-AnnaBieszczad";
             }
-            if(string.Compare(Name, "Vandalism") == 0)
+            if(string.Compare(Name, "goal-Vandalism") == 0)
             {
-                keepersNeededforGoal1 = "Radish";
-                keepersNeededforGoal2 = "Nick";
+                keepersNeededforGoal1 = "keeper-Radish";
+                keepersNeededforGoal2 = "keeper-Nick";
             }
-            if(string.Compare(Name, "WaitHowOldAreYou") == 0)
+            if(string.Compare(Name, "goal-WaitHowOldAreYou") == 0)
             {
-                keepersNeededforGoal1 = "Ryan";
-                keepersNeededforGoal2 = "Nick";
+                keepersNeededforGoal1 = "keeper-Ryan";
+                keepersNeededforGoal2 = "keeper-Nick";
             }
         }
     }

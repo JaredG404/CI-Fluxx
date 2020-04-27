@@ -153,7 +153,10 @@ public class GameController : MonoBehaviour
             {
                 EnemygoalMet = true;
             }
-            if(string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal2, enemyKeeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0)
+            if(string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal2, enemyKeeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0
+                || string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal3, enemyKeeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0
+                || string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal4, enemyKeeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0
+                || string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal5, enemyKeeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0)
             {
                 EnemygoalMet2 = true;
             }
