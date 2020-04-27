@@ -8,6 +8,7 @@ public class CardZoom : MonoBehaviour
     public GameObject keeperArea;
     public GameObject enemyKeeperArea;
     private GameObject zoomCard;
+
     public void Awake()
     {
         Canvas = GameObject.Find("Canvas");
@@ -51,13 +52,19 @@ public class CardZoom : MonoBehaviour
 
     public void clicked()
     {
-        if(gameObject.GetComponent<UICards>().isKeeper() && gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
+        if(GameController.currentGame.gameState == GameController.GameState.PlayerTurn)
         {
-            gameObject.transform.SetParent(keeperArea.transform, false);
+            if(gameObject.GetComponent<UICards>().isKeeper() && gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
+            {
+                gameObject.transform.SetParent(keeperArea.transform, false);
+                GameController.currentGame.cardsPlayed++;
+                Debug.Log(GameController.currentGame.cardsPlayed);
+            }
+            if(gameObject.GetComponent<UICards>().isKeeper() && !gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
+            {
+                gameObject.transform.SetParent(enemyKeeperArea.transform, false);
+            }
         }
-        if(gameObject.GetComponent<UICards>().isKeeper() && !gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
-        {
-            gameObject.transform.SetParent(enemyKeeperArea.transform, false);
-        }
+        
     }
 }
