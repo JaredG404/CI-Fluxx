@@ -11,4 +11,13 @@ public class GameMenu : MonoBehaviour {
         Debug.Log ("Quit Game.");
         Application.Quit ();
     }
+    public void Deck()
+    {
+        SceneManager.LoadScene("Deck");
+    }
+
+    public void Goals()
+    {
+        SceneManager.LoadScene("Deck_Goals");
+    }
 }
