@@ -20,4 +20,16 @@ public class GameMenu : MonoBehaviour {
     {
         SceneManager.LoadScene("Deck_Goals");
     }
+    public void Keeper()
+    {
+        SceneManager.LoadScene("Deck_Keeper");
+    }
+    public void Actions()
+    {
+        SceneManager.LoadScene("Deck_Actions");
+    }
+    public void Rules()
+    {
+        SceneManager.LoadScene("Deck_Rules");
+    }
 }
