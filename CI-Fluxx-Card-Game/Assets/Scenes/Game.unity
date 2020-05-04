@@ -454,6 +454,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9146d1ce322f9ea4f9657c375c5e5160, type: 3}
   - {fileID: 21300000, guid: ea661b55980af5d42886168e186600b7, type: 3}
   - {fileID: 21300000, guid: 9146d1ce322f9ea4f9657c375c5e5160, type: 3}
+  - {fileID: 21300000, guid: 65c346418e0b20c4b8828b3968699625, type: 3}
+  - {fileID: 21300000, guid: ecfd153bd137fb1499b097ee94bdad85, type: 3}
+  - {fileID: 21300000, guid: 419de11b756b164478ab8f2eeffa8c27, type: 3}
+  - {fileID: 21300000, guid: be52e4d0092b6da479656c766a464bc5, type: 3}
+  - {fileID: 21300000, guid: 4e4bd715762021941ae5ceda286544ed, type: 3}
+  - {fileID: 21300000, guid: 7718e7acdaefd0745872bfc85b56492a, type: 3}
+  - {fileID: 21300000, guid: 8b211fae74f18c746909cbaefd998676, type: 3}
+  - {fileID: 21300000, guid: d08bfd2d3f7d6f34dbdd1ceef757682f, type: 3}
+  - {fileID: 21300000, guid: b6f7478f852c3b14ebdf2bb3063ed09c, type: 3}
+  - {fileID: 21300000, guid: 91c73f4980f4cf244881e015a62d5f3e, type: 3}
   goalArr:
   - {fileID: 21300000, guid: d08bfd2d3f7d6f34dbdd1ceef757682f, type: 3}
   - {fileID: 21300000, guid: 65c346418e0b20c4b8828b3968699625, type: 3}
@@ -1064,7 +1074,7 @@ MonoBehaviour:
   enemyKeeperArea: {fileID: 236254785}
   GameOverUI: {fileID: 1979854899}
   GameOverLoseUI: {fileID: 1931476854}
-  currentGoal: {fileID: 0}
+  currentGoal: {fileID: 1261744487}
   currentDrawCardsRule: 0
   currentPlayCardsRule: 0
 --- !u!114 &1623230934

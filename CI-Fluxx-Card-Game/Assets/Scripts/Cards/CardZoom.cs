@@ -6,6 +6,7 @@ public class CardZoom : MonoBehaviour
 {
     public GameObject Canvas;
     public GameObject keeperArea;
+    public GameObject currentGoal;
     public GameObject enemyKeeperArea;
     private GameObject zoomCard;
     public void Awake()
@@ -58,6 +59,11 @@ public class CardZoom : MonoBehaviour
         if(gameObject.GetComponent<UICards>().isKeeper() && !gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
         {
             gameObject.transform.SetParent(enemyKeeperArea.transform, false);
+        }
+        if(gameObject.GetComponent<UICards>().isGoal() && !gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
+        {
+            gameObject.transform.SetParent(currentGoal.transform, false);
+            currentGoal.GetComponent<GameController>().currentGoal = gameObject.gameObject;
         }
     }
 }
