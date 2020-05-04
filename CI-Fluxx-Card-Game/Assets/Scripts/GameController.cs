@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour
 
     }
 
-
     public static GameController currentGame;
     public GameObject cards;
     public Transform transform_Deck, transform_Goal, transform_Rules;
@@ -26,7 +25,7 @@ public class GameController : MonoBehaviour
     public GameObject keeperArea;
     public GameObject enemyKeeperArea;
     public GameObject GameOverUI;
-    public GameObject GameOverLoseUI;
+    public GameObject GameOverLoseUI, playerTurn, enmeyTurn;
     private bool goalMeet;
     private bool goalMeet2;
     private bool EnemygoalMet;
@@ -38,8 +37,8 @@ public class GameController : MonoBehaviour
     public int currentDrawCardsRule;
     public int currentPlayCardsRule;
     public GameState gameState;
-
     public int cardsPlayed;
+    public int enemeyCardsPlayed;
     // Start is called before the first fra`    me update
     void Start()
     {
@@ -54,8 +53,9 @@ public class GameController : MonoBehaviour
         currentDrawCardsRule = 1;
         currentPlayCardsRule = 1;
         cardsPlayed = 0;
-        GameFlow();
-    }
+        enemeyCardsPlayed = 0;
+        StartCoroutine(GameFlow());    
+        }
 
     private void Awake()
     {
@@ -140,7 +140,7 @@ public class GameController : MonoBehaviour
         Rules[0].transform.SetParent(transform_Rules, false);
         Rules[0].GetComponent<UICards>().gob_FrontCard.SetActive(false);
         gameState = GameState.PlayerTurn;
-        GameFlow();
+        StartCoroutine(GameFlow());
     }
 
 
@@ -218,7 +218,7 @@ public class GameController : MonoBehaviour
             listCard.RemoveAt(AIRdCard);
         }
     }
-    private void GameFlow()
+    private IEnumerator GameFlow()
     {
         
         switch(gameState)
@@ -231,22 +231,31 @@ public class GameController : MonoBehaviour
             }
             case GameState.PlayerTurn:
             {
+                yield return new WaitForSeconds(2f);
                 //deal the number of cards corresponding to the current rules and play the number of cards corresponding to the rules
                 Debug.Log("playTurn");
+                enmeyTurn.SetActive(false);
+                playerTurn.SetActive(true);
                 StartCoroutine(drawCards(currentDrawCardsRule));
                 StartCoroutine(waitForTurn());
+                //currentGame.cardsPlayed = 0;
                 break;
             }
             case GameState.EnemeyTurn:
             {
                 //deal the number of cards corresponding to the current rules to the enmey and play the number of cards corresponding to the rules to the enemy
                 Debug.Log("enemys turn");
+                playerTurn.SetActive(false);
+                enmeyTurn.SetActive(true);
                 StartCoroutine(drawCardsForEnemy(currentDrawCardsRule));
+                StartCoroutine(waitForTurnEnemy());
                 gameState = GameState.PlayerTurn;
-                //GameFlow();
+                //currentGame.enemeyCardsPlayed = 0;
+                StartCoroutine(GameFlow());
                 break;
             }
         }
+        Debug.Log("alskdjfa;lsdkjf");
     }
 
     IEnumerator waitForTurn()
@@ -258,13 +267,34 @@ public class GameController : MonoBehaviour
             {
                 Debug.Log("played  turn over hopefully!");
                 gameState = GameState.EnemeyTurn;
-                GameFlow();
+                currentGame.cardsPlayed = 0;
+                StartCoroutine(GameFlow());
                 yield break ;
             }
             yield return null ;
         }
-        Debug.Log("turn over sorry mate!");
-        gameState = GameState.EnemeyTurn;
-        GameFlow();
+        // Debug.Log("turn over sorry mate!");
+        // gameState = GameState.EnemeyTurn;
+        // StartCoroutine(GameFlow());
+    }
+
+    IEnumerator waitForTurnEnemy()
+    {
+        //60 second timer 
+        for( float timer = 60 ; timer >= 0 ; timer -= Time.deltaTime )
+        {
+            if(currentGame.enemeyCardsPlayed == currentPlayCardsRule)
+            {
+                Debug.Log("enemy turn over hopefully!");
+                gameState = GameState.EnemeyTurn;
+                currentGame.enemeyCardsPlayed = 0;
+                //StartCoroutine(GameFlow());
+                yield break ;
+            }
+            yield return null ;
+        }
+        // Debug.Log("turn over sorry mate!");
+        // gameState = GameState.EnemeyTurn;
+        // StartCoroutine(GameFlow());
     }
 }
