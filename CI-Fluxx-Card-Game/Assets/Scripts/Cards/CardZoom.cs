@@ -14,6 +14,7 @@ public class CardZoom : MonoBehaviour
         Canvas = GameObject.Find("Canvas");
         keeperArea = GameObject.Find("Keepers");
         enemyKeeperArea = GameObject.Find("Enemy Keepers");
+        currentGoal = GameObject.Find("Goal");
     }
 
     public void OnHoverEnter()
@@ -60,7 +61,7 @@ public class CardZoom : MonoBehaviour
         {
             gameObject.transform.SetParent(enemyKeeperArea.transform, false);
         }
-        if(gameObject.GetComponent<UICards>().isGoal() && !gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
+        if(gameObject.GetComponent<UICards>().isGoal() && gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
         {
             gameObject.transform.SetParent(currentGoal.transform, false);
             currentGoal.GetComponent<GameController>().currentGoal = gameObject.gameObject;
