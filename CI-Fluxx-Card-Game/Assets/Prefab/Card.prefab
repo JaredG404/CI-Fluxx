@@ -83,6 +83,9 @@ MonoBehaviour:
   gob_FrontCard: {fileID: 7793001937603431561}
   type: 0
   Name: 
+  keepersNeededforGoal1: 
+  keepersNeededforGoal2: 
+  isThisCardYours: 0
 --- !u!114 &-8654311846905737833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Canvas: {fileID: 0}
+  keeperArea: {fileID: 0}
+  enemyKeeperArea: {fileID: 0}
 --- !u!114 &7361662589513568084
 MonoBehaviour:
   m_ObjectHideFlags: 0
