@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -25,7 +26,8 @@ public class GameController : MonoBehaviour
     public GameObject keeperArea;
     public GameObject enemyKeeperArea;
     public GameObject GameOverUI;
-    public GameObject GameOverLoseUI, playerTurn, enmeyTurn;
+    public GameObject GameOverLoseUI;
+    public GameObject currentGoal;
     private bool goalMeet;
     private bool goalMeet2;
     private bool EnemygoalMet;
@@ -132,9 +134,12 @@ public class GameController : MonoBehaviour
             listCard[rdAI].GetComponent<UICards>().gob_FrontCard.SetActive(false);
             listCard.RemoveAt(rdAI);
         }
+        // picks random goal in beginning of game
         yield return new WaitForSeconds(0.5f);
-        listGoal[0].transform.SetParent(transform_Goal, false);
-        listGoal[0].GetComponent<UICards>().gob_FrontCard.SetActive(false);
+        int randomGoalIndex = Random.Range(0, listGoal.Count - 1);
+        currentGoal = listGoal[randomGoalIndex];
+        listGoal[randomGoalIndex].transform.SetParent(transform_Goal, false);
+        listGoal[randomGoalIndex].GetComponent<UICards>().gob_FrontCard.SetActive(false);
 
         yield return new WaitForSeconds(0.5f);
         Rules[0].transform.SetParent(transform_Rules, false);
@@ -149,11 +154,14 @@ public class GameController : MonoBehaviour
 
         for (int i = 0; i < NumberOfKeepersInKeeperArea; i++)
         {
-            if(string.Compare(listGoal[0].GetComponent<UICards>().keepersNeededforGoal1, keeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0)
+            if(string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal1, keeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0)
             {
                 goalMeet = true;
             }
-            if(string.Compare(listGoal[0].GetComponent<UICards>().keepersNeededforGoal2, keeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0)
+            if(string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal2, keeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0
+                || string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal3, keeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0
+                || string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal4, keeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0
+                || string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal5, keeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0)
             {
                 goalMeet2 = true;
             }
@@ -163,6 +171,7 @@ public class GameController : MonoBehaviour
                 goalMeet = false;
                 gameState = GameState.GameIsOver;
                 GameOverUI.SetActive(true);
+                StartCoroutine(waiter());
             }
         }
         //Debug.Log("goal for player not met");
@@ -174,11 +183,14 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < NumberOfKeepersInKeeperAreaForEnemy; i++)
         {
-            if(string.Compare(listGoal[0].GetComponent<UICards>().keepersNeededforGoal1, enemyKeeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0)
+            if(string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal1, enemyKeeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0)
             {
                 EnemygoalMet = true;
             }
-            if(string.Compare(listGoal[0].GetComponent<UICards>().keepersNeededforGoal2, enemyKeeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0)
+            if(string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal2, enemyKeeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0
+                || string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal3, enemyKeeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0
+                || string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal4, enemyKeeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0
+                || string.Compare(currentGoal.GetComponent<UICards>().keepersNeededforGoal5, enemyKeeperArea.transform.GetChild(i).gameObject.GetComponent<UICards>().Name) == 0)
             {
                 EnemygoalMet2 = true;
             }
@@ -187,12 +199,21 @@ public class GameController : MonoBehaviour
                 Debug.Log("enemey won");
                 gameState = GameState.GameIsOver;
                 GameOverLoseUI.SetActive(true);
+                StartCoroutine(waiter());
+                
             }
         }
         EnemygoalMet = false;
         EnemygoalMet2 = false;
     }
-    public IEnumerator drawCards(int cardsToDraw)
+
+    public IEnumerator waiter()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void drawCards(int cardsToDraw)
     {
         for (int i = 0; i < cardsToDraw; i++)
         {
