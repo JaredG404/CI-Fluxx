@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour
     public GameState gameState;
     public int cardsPlayed;
     public int enemeyCardsPlayed;
+    public GameObject playerTurn, enmeyTurn;
     // Start is called before the first fra`    me update
     void Start()
     {
@@ -213,7 +214,7 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void drawCards(int cardsToDraw)
+    public IEnumerator drawCards(int cardsToDraw)
     {
         for (int i = 0; i < cardsToDraw; i++)
         {
