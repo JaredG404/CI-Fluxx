@@ -308,7 +308,7 @@ public class GameController : MonoBehaviour
             if(currentGame.enemeyCardsPlayed == currentPlayCardsRule)
             {
                 Debug.Log("enemy turn over hopefully!");
-                gameState = GameState.EnemeyTurn;
+                gameState = GameState.PlayerTurn;
                 currentGame.enemeyCardsPlayed = 0;
                 //StartCoroutine(GameFlow());
                 yield break ;
