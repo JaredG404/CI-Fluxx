@@ -92,7 +92,7 @@ public class UICards : MonoBehaviour
             if(string.Compare(Name, "goal-BoredProblems") == 0)
             {
                 keepersNeededforGoal1 = "keeper-Marker";
-                keepersNeededforGoal2 = "keeper-AJ";
+                keepersNeededforGoal2 = "keeper-AJBieszczad";
             }
             if(string.Compare(Name, "goal-DinnerTime") == 0)
             {

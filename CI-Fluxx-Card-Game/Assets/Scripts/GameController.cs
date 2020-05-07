@@ -102,8 +102,10 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < LoadDeck.instance.goalArr.Length; i++)
         {
             GameObject _goals = Instantiate(cards, transform_Goal.position, Quaternion.identity);
+            _goals.transform.SetParent(transform_Deck, false);
             _goals.GetComponent<UICards>().image_cards.sprite = LoadDeck.instance.goalArr[i];
             listGoal.Add(_goals);
+            listCard.Add(_goals);
         }
         
         GameObject _rules = Instantiate(cards, transform_Rules.position, Quaternion.identity);
@@ -270,7 +272,7 @@ public class GameController : MonoBehaviour
                 playerTurn.SetActive(false);
                 enmeyTurn.SetActive(true);
                 StartCoroutine(drawCardsForEnemy(currentDrawCardsRule));
-                StartCoroutine(waitForTurnEnemy());
+                StartCoroutine(AIPlay());
                 gameState = GameState.PlayerTurn;
                 //currentGame.enemeyCardsPlayed = 0;
                 StartCoroutine(GameFlow());
@@ -300,21 +302,28 @@ public class GameController : MonoBehaviour
         // StartCoroutine(GameFlow());
     }
 
-    IEnumerator waitForTurnEnemy()
+    IEnumerator AIPlay()
     {
+
+        yield return new WaitForSeconds(2f);
+        int AICardPlayed = Random.Range(0, NumberOfKeepersInKeeperAreaForEnemy-1);
+
+        enemyZone.transform.GetChild(AICardPlayed).SetParent(enemyKeeperArea.transform, false);
+
+        yield return new WaitForSeconds(.5f);
         //60 second timer 
-        for( float timer = 60 ; timer >= 0 ; timer -= Time.deltaTime )
-        {
-            if(currentGame.enemeyCardsPlayed == currentPlayCardsRule)
-            {
-                Debug.Log("enemy turn over hopefully!");
-                gameState = GameState.PlayerTurn;
-                currentGame.enemeyCardsPlayed = 0;
-                //StartCoroutine(GameFlow());
-                yield break ;
-            }
-            yield return null ;
-        }
+        // for( float timer2 = 60 ; timer2 >= 0 ; timer2 -= Time.deltaTime )
+        // {
+        //     if(currentGame.enemeyCardsPlayed == currentPlayCardsRule)
+        //     {
+        //         Debug.Log("enemy turn over hopefully!");
+        //         gameState = GameState.PlayerTurn;
+        //         currentGame.enemeyCardsPlayed = 0;
+        //         //StartCoroutine(GameFlow());
+        //         yield break ;
+        //     }
+        //     yield return null ;
+        // }
         // Debug.Log("turn over sorry mate!");
         // gameState = GameState.EnemeyTurn;
         // StartCoroutine(GameFlow());
