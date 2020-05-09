@@ -20,6 +20,8 @@ public class UICards : MonoBehaviour
     public string keepersNeededforGoal3;
     public string keepersNeededforGoal4;
     public string keepersNeededforGoal5;
+
+    private int drawRule, playRule, limitRule;
     public bool isThisCardYours = false;
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,8 @@ public class UICards : MonoBehaviour
             type = CardType.RULE;
         }
         KeepersForTheGoal();
+        RulesCardsRule();
+
     }
 
     // Update is called once per frame
@@ -135,6 +139,25 @@ public class UICards : MonoBehaviour
             }
         }
     }
+
+    public void RulesCardsRule()
+    {
+        if(isRule())
+        {
+            if(string.Compare(Name, "Draw2") == 0)
+            {
+                drawRule = 2;
+                playRule = -1;// null
+                limitRule = -1;//null
+            }
+            else if(string.Compare(Name, "Draw3") == 0)
+            {
+                drawRule = 3;
+                playRule = -1;// null
+                limitRule = -1;//null
+            }
+        }
+    }
     public string getName()
     {
         return Name;
@@ -147,5 +170,17 @@ public class UICards : MonoBehaviour
     public void SetIsThisCardYours(bool x)
     {
         isThisCardYours = x;
+    }
+    public int getDrawRules()
+    {
+        return drawRule;
+    }
+    public int getPlayRule()
+    {
+        return playRule;
+    }
+    public int getLimitRule()
+    {
+        return limitRule;
     }
 }

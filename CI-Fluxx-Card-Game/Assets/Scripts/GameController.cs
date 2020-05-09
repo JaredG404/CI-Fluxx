@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
 
     public static GameController currentGame;
     public GameObject cards;
-    public Transform transform_Deck, transform_Goal, transform_Rules;
+    public Transform transform_Deck, transform_Goal, transform_Rules, transform_discard;
     public List<GameObject> listCard = new List<GameObject>(32);
     public List<GameObject> listGoal;
     public List<GameObject> Rules;
@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour
         cardsPlayed = 0;
         enemeyCardsPlayed = 0;
         StartCoroutine(GameFlow());    
-        }
+    }
 
     private void Awake()
     {
@@ -80,11 +80,11 @@ public class GameController : MonoBehaviour
             NumberOfKeepersInKeeperAreaForEnemy = enemyKeeperArea.transform.childCount;
             if(NumberOfKeepersInKeeperArea != 0 && gameState != GameState.GameIsOver)
             {
-                CheckIfGoalIsMet();
+                //CheckIfGoalIsMet();
             }
             if(NumberOfKeepersInKeeperAreaForEnemy != 0 && gameState != GameState.GameIsOver)
             {
-                CheckIfGoalIsMetForEnemy();
+                //CheckIfGoalIsMetForEnemy();
             }
     }
   
@@ -108,6 +108,14 @@ public class GameController : MonoBehaviour
             listCard.Add(_goals);
         }
         
+        // for (int i = 0; i < LoadDeck.instance.rulesArr.Length; i++)
+        // {
+        //     GameObject _Rules = Instantiate(cards, transform_Rules.position, Quaternion.identity);
+        //     _Rules.transform.SetParent(transform_Deck, false);
+        //     _Rules.GetComponent<UICards>().image_cards.sprite = LoadDeck.instance.rulesArr[i];
+        //     listCard.Add(_Rules);
+        // }
+
         GameObject _rules = Instantiate(cards, transform_Rules.position, Quaternion.identity);
         _rules.GetComponent<UICards>().image_cards.sprite = LoadDeck.instance.basicRules;
         Rules.Add(_rules);
@@ -139,10 +147,16 @@ public class GameController : MonoBehaviour
         }
         // picks random goal in beginning of game
         yield return new WaitForSeconds(0.5f);
-        int randomGoalIndex = Random.Range(0, listGoal.Count - 1);
-        currentGoal = listGoal[randomGoalIndex];
-        listGoal[randomGoalIndex].transform.SetParent(transform_Goal, false);
-        listGoal[randomGoalIndex].GetComponent<UICards>().gob_FrontCard.SetActive(false);
+        int randomGoalIndex = Random.Range(0, listCard.Count - 1);
+        while(listCard[randomGoalIndex].GetComponent<UICards>().isGoal() == false)
+        {
+            randomGoalIndex = Random.Range(0, listCard.Count - 1);
+        }
+        currentGoal = listCard[randomGoalIndex];
+        listCard[randomGoalIndex].transform.SetParent(transform_Goal, false);
+        listCard[randomGoalIndex].GetComponent<UICards>().gob_FrontCard.SetActive(false);
+        listCard.RemoveAt(randomGoalIndex);
+        
 
         yield return new WaitForSeconds(0.5f);
         Rules[0].transform.SetParent(transform_Rules, false);
@@ -292,8 +306,9 @@ public class GameController : MonoBehaviour
                 Debug.Log("played  turn over hopefully!");
                 gameState = GameState.EnemeyTurn;
                 currentGame.cardsPlayed = 0;
+                CheckIfGoalIsMet();
                 StartCoroutine(GameFlow());
-                yield break ;
+                yield break;
             }
             yield return null ;
         }
@@ -306,26 +321,21 @@ public class GameController : MonoBehaviour
     {
 
         yield return new WaitForSeconds(2f);
-        int AICardPlayed = Random.Range(0, NumberOfKeepersInKeeperAreaForEnemy-1);
+        int AICardPlayed = Random.Range(0, enemyZone.transform.childCount - 1);
 
-        enemyZone.transform.GetChild(AICardPlayed).SetParent(enemyKeeperArea.transform, false);
-
+        if(enemyZone.transform.GetChild(AICardPlayed).GetComponent<UICards>().isGoal() == true)
+        {
+            GameObject tempCard = enemyZone.transform.GetChild(AICardPlayed).gameObject;
+            transform_Goal.GetChild(0).transform.SetParent(transform_discard, false);
+            currentGoal.GetComponent<UICards>().gob_FrontCard.SetActive(true); 
+            enemyZone.transform.GetChild(AICardPlayed).SetParent(transform_Goal, false);
+            currentGoal = tempCard;
+            currentGoal.transform.Rotate(0,-180,0);
+        }
+        else{
+            enemyZone.transform.GetChild(AICardPlayed).SetParent(enemyKeeperArea.transform, false);
+        }
+        CheckIfGoalIsMetForEnemy();
         yield return new WaitForSeconds(.5f);
-        //60 second timer 
-        // for( float timer2 = 60 ; timer2 >= 0 ; timer2 -= Time.deltaTime )
-        // {
-        //     if(currentGame.enemeyCardsPlayed == currentPlayCardsRule)
-        //     {
-        //         Debug.Log("enemy turn over hopefully!");
-        //         gameState = GameState.PlayerTurn;
-        //         currentGame.enemeyCardsPlayed = 0;
-        //         //StartCoroutine(GameFlow());
-        //         yield break ;
-        //     }
-        //     yield return null ;
-        // }
-        // Debug.Log("turn over sorry mate!");
-        // gameState = GameState.EnemeyTurn;
-        // StartCoroutine(GameFlow());
     }
 }

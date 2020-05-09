@@ -8,12 +8,14 @@ public class CardZoom : MonoBehaviour
     public GameObject keeperArea;
     public GameObject enemyKeeperArea;
     private GameObject zoomCard;
+    public GameObject goalArea;
 
     public void Awake()
     {
         Canvas = GameObject.Find("Canvas");
         keeperArea = GameObject.Find("Keepers");
         enemyKeeperArea = GameObject.Find("Enemy Keepers");
+        goalArea = GameObject.Find("Goal");
     }
 
     public void OnHoverEnter()
@@ -66,10 +68,20 @@ public class CardZoom : MonoBehaviour
     
             if(gameObject.GetComponent<UICards>().isGoal())
             {
-                GameController.currentGame.currentGoal.transform.SetParent(GameController.currentGame.transform_Deck, false);
-                gameObject.transform.SetParent(GameController.currentGame.transform_Goal, false);
+                GameController.currentGame.currentGoal.transform.SetParent(GameController.currentGame.transform_discard, false);
+                GameController.currentGame.currentGoal.GetComponent<UICards>().gob_FrontCard.SetActive(true);             
+                gameObject.transform.SetParent(goalArea.transform, false);
                 GameController.currentGame.currentGoal = gameObject;
+                GameController.currentGame.currentGoal.transform.Rotate(0,-180,0);
                 GameController.currentGame.cardsPlayed++;
+            }
+            if(gameObject.GetComponent<UICards>().isRule())
+            {
+                GameController.currentGame.currentDrawCardsRule = gameObject.GetComponent<UICards>().getDrawRules();
+                GameController.currentGame.Rules[0].transform.SetParent(GameController.currentGame.transform_discard, false);
+                gameObject.transform.SetParent(GameController.currentGame.transform_Rules, false);
+                GameController.currentGame.cardsPlayed++;
+
             }
         
     }
