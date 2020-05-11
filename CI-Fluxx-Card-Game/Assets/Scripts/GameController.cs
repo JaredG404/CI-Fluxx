@@ -231,6 +231,9 @@ public class GameController : MonoBehaviour
     public IEnumerator waiter()
     {
         yield return new WaitForSeconds(3f);
+        Debug.Log("load main menu");
+        //GameOverLoseUI.SetActive(false);
+        //GameOverUI.SetActive(false);
         SceneManager.LoadScene("MainMenu");
     }
 
