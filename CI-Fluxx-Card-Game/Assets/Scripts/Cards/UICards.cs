@@ -20,6 +20,8 @@ public class UICards : MonoBehaviour
     public string keepersNeededforGoal3;
     public string keepersNeededforGoal4;
     public string keepersNeededforGoal5;
+
+    private int drawRule, playRule, limitRule;
     public bool isThisCardYours = false;
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,8 @@ public class UICards : MonoBehaviour
             type = CardType.RULE;
         }
         KeepersForTheGoal();
+        RulesCardsRule();
+
     }
 
     // Update is called once per frame
@@ -92,7 +96,7 @@ public class UICards : MonoBehaviour
             if(string.Compare(Name, "goal-BoredProblems") == 0)
             {
                 keepersNeededforGoal1 = "keeper-Marker";
-                keepersNeededforGoal2 = "keeper-AJ";
+                keepersNeededforGoal2 = "keeper-AJBieszczad";
             }
             if(string.Compare(Name, "goal-DinnerTime") == 0)
             {
@@ -133,6 +137,56 @@ public class UICards : MonoBehaviour
                 keepersNeededforGoal1 = "keeper-Ryan";
                 keepersNeededforGoal2 = "keeper-Nick";
             }
+            if(string.Compare(Name, "goal-IDEWar") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-CLion";
+                keepersNeededforGoal2 = "keeper-VisualStudio";
+            }
+            if(string.Compare(Name, "goal-LanguageOfWizards") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-pep9";
+                keepersNeededforGoal2 = "keeper-PeterSmith";
+            }
+            if(string.Compare(Name, "goal-OnlineLearning") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-Zoom";
+                keepersNeededforGoal2 = "keeper-MyCI";
+            }
+            if(string.Compare(Name, "goal-ProjectChoices") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-Unity";
+                keepersNeededforGoal2 = "keeper-AndroidStudio";
+            }
+            if(string.Compare(Name, "goal-Teamwork") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-GitHub";
+                keepersNeededforGoal2 = "keeper-Unity";
+                keepersNeededforGoal3 = "keeper-AndroidStudio";
+            }
+            if(string.Compare(Name, "goal-TheRivalry") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-AMD";
+                keepersNeededforGoal2 = "keeper-TimMattson";
+            }
+        }
+    }
+
+    public void RulesCardsRule()
+    {
+        if(isRule())
+        {
+            if(string.Compare(Name, "Draw2") == 0)
+            {
+                drawRule = 2;
+                playRule = -1;// null
+                limitRule = -1;//null
+            }
+            else if(string.Compare(Name, "Draw3") == 0)
+            {
+                drawRule = 3;
+                playRule = -1;// null
+                limitRule = -1;//null
+            }
         }
     }
     public string getName()
@@ -147,5 +201,17 @@ public class UICards : MonoBehaviour
     public void SetIsThisCardYours(bool x)
     {
         isThisCardYours = x;
+    }
+    public int getDrawRules()
+    {
+        return drawRule;
+    }
+    public int getPlayRule()
+    {
+        return playRule;
+    }
+    public int getLimitRule()
+    {
+        return limitRule;
     }
 }
