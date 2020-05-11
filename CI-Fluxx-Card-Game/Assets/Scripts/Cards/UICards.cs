@@ -137,6 +137,37 @@ public class UICards : MonoBehaviour
                 keepersNeededforGoal1 = "keeper-Ryan";
                 keepersNeededforGoal2 = "keeper-Nick";
             }
+            if(string.Compare(Name, "goal-IDEWar") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-CLion";
+                keepersNeededforGoal2 = "keeper-VisualStudio";
+            }
+            if(string.Compare(Name, "goal-LanguageOfWizards") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-pep9";
+                keepersNeededforGoal2 = "keeper-PeterSmith";
+            }
+            if(string.Compare(Name, "goal-OnlineLearning") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-Zoom";
+                keepersNeededforGoal2 = "keeper-MyCI";
+            }
+            if(string.Compare(Name, "goal-ProjectChoices") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-Unity";
+                keepersNeededforGoal2 = "keeper-AndroidStudio";
+            }
+            if(string.Compare(Name, "goal-Teamwork") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-GitHub";
+                keepersNeededforGoal2 = "keeper-Unity";
+                keepersNeededforGoal3 = "keeper-AndroidStudio";
+            }
+            if(string.Compare(Name, "goal-TheRivalry") == 0)
+            {
+                keepersNeededforGoal1 = "keeper-AMD";
+                keepersNeededforGoal2 = "keeper-TimMattson";
+            }
         }
     }
 

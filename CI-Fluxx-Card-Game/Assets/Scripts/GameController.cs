@@ -80,11 +80,11 @@ public class GameController : MonoBehaviour
             NumberOfKeepersInKeeperAreaForEnemy = enemyKeeperArea.transform.childCount;
             if(NumberOfKeepersInKeeperArea != 0 && gameState != GameState.GameIsOver)
             {
-                //CheckIfGoalIsMet();
+                CheckIfGoalIsMet();
             }
             if(NumberOfKeepersInKeeperAreaForEnemy != 0 && gameState != GameState.GameIsOver)
             {
-                //CheckIfGoalIsMetForEnemy();
+                CheckIfGoalIsMetForEnemy();
             }
     }
   
@@ -142,7 +142,7 @@ public class GameController : MonoBehaviour
             //iTween.MoveTo(listCard[rdAI], iTween.Hash("position", enemyZone, "easeType", "Linear", "loopType", "none", "time", 0.4f));
             iTween.RotateBy(listCard[rdAI], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.4f));
             yield return new WaitForSeconds(0.25f);
-            listCard[rdAI].GetComponent<UICards>().gob_FrontCard.SetActive(false);
+            listCard[rdAI].GetComponent<UICards>().gob_FrontCard.SetActive(true);
             listCard.RemoveAt(rdAI);
         }
         // picks random goal in beginning of game
@@ -188,6 +188,8 @@ public class GameController : MonoBehaviour
                 goalMeet = false;
                 gameState = GameState.GameIsOver;
                 GameOverUI.SetActive(true);
+                playerTurn.SetActive(false);
+                enmeyTurn.SetActive(false);
                 StartCoroutine(waiter());
             }
         }
@@ -216,6 +218,8 @@ public class GameController : MonoBehaviour
                 Debug.Log("enemey won");
                 gameState = GameState.GameIsOver;
                 GameOverLoseUI.SetActive(true);
+                playerTurn.SetActive(false);
+                enmeyTurn.SetActive(false);
                 StartCoroutine(waiter());
                 
             }
@@ -251,7 +255,7 @@ public class GameController : MonoBehaviour
             int AIRdCard = Random.Range(0,listCard.Count-1);
             listCard[AIRdCard].transform.SetParent(enemyZone.transform, true);
             iTween.RotateBy(listCard[AIRdCard], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.2f));
-            listCard[AIRdCard].GetComponent<UICards>().gob_FrontCard.SetActive(false);
+            listCard[AIRdCard].GetComponent<UICards>().gob_FrontCard.SetActive(true);
             listCard[AIRdCard].GetComponent<UICards>().SetIsThisCardYours(false);
             listCard.RemoveAt(AIRdCard);
         }
@@ -293,7 +297,6 @@ public class GameController : MonoBehaviour
                 break;
             }
         }
-        Debug.Log("alskdjfa;lsdkjf");
     }
 
     IEnumerator waitForTurn()
@@ -323,9 +326,11 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         int AICardPlayed = Random.Range(0, enemyZone.transform.childCount - 1);
 
+        GameObject tempCard = enemyZone.transform.GetChild(AICardPlayed).gameObject;
+
         if(enemyZone.transform.GetChild(AICardPlayed).GetComponent<UICards>().isGoal() == true)
         {
-            GameObject tempCard = enemyZone.transform.GetChild(AICardPlayed).gameObject;
+            //GameObject tempCard = enemyZone.transform.GetChild(AICardPlayed).gameObject;
             transform_Goal.GetChild(0).transform.SetParent(transform_discard, false);
             currentGoal.GetComponent<UICards>().gob_FrontCard.SetActive(true); 
             enemyZone.transform.GetChild(AICardPlayed).SetParent(transform_Goal, false);
@@ -335,6 +340,8 @@ public class GameController : MonoBehaviour
         else{
             enemyZone.transform.GetChild(AICardPlayed).SetParent(enemyKeeperArea.transform, false);
         }
+
+        tempCard.GetComponent<UICards>().gob_FrontCard.SetActive(false);
         CheckIfGoalIsMetForEnemy();
         yield return new WaitForSeconds(.5f);
     }
