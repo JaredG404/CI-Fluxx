@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
     public GameObject GameOverUI;
     public GameObject GameOverLoseUI;
     public GameObject currentGoal;
+    public GameObject menu;
     private bool goalMeet;
     private bool goalMeet2;
     private bool EnemygoalMet;
@@ -195,7 +196,7 @@ public class GameController : MonoBehaviour
                 playerTurn.SetActive(false);
                 enmeyTurn.SetActive(false);
                 StartCoroutine(waiter());
-                Application.Quit();
+                //Application.Quit();
             }
         }
         //Debug.Log("goal for player not met");
@@ -226,7 +227,7 @@ public class GameController : MonoBehaviour
                 playerTurn.SetActive(false);
                 enmeyTurn.SetActive(false);
                 StartCoroutine(waiter());
-                Application.Quit();
+                //Application.Quit();
                 
             }
         }
@@ -238,8 +239,11 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         Debug.Log("load main menu");
-        //GameOverLoseUI.SetActive(false);
-        //GameOverUI.SetActive(false);
+        playerTurn.SetActive(false);
+        enmeyTurn.SetActive(false);
+        GameOverLoseUI.SetActive(false);
+        GameOverUI.SetActive(false);
+        Destroy(gameObject);
         SceneManager.LoadScene("MainMenu");
     }
 
