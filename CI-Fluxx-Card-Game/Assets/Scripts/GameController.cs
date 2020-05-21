@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
 
     public static GameController currentGame;
     public GameObject cards;
-    public Transform transform_Deck, transform_Goal, transform_Rules, transform_discard;
+    public Transform transform_Deck, transform_Goal, transform_Rules, transform_discard, transform_RulePlay;
     public List<GameObject> listCard = new List<GameObject>(32);
     public List<GameObject> listGoal;
     public List<GameObject> Rules;
@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
     public GameObject GameOverUI;
     public GameObject GameOverLoseUI;
     public GameObject currentGoal;
+    public GameObject menu;
     private bool goalMeet;
     private bool goalMeet2;
     private bool EnemygoalMet;
@@ -42,6 +43,8 @@ public class GameController : MonoBehaviour
     public int cardsPlayed;
     public int enemeyCardsPlayed;
     public GameObject playerTurn, enmeyTurn;
+
+    public bool clickToggle;
     // Start is called before the first fra`    me update
     void Start()
     {
@@ -57,6 +60,7 @@ public class GameController : MonoBehaviour
         currentPlayCardsRule = 1;
         cardsPlayed = 0;
         enemeyCardsPlayed = 0;
+        clickToggle = false;
         StartCoroutine(GameFlow());    
     }
 
@@ -108,16 +112,17 @@ public class GameController : MonoBehaviour
             listCard.Add(_goals);
         }
         
-        // for (int i = 0; i < LoadDeck.instance.rulesArr.Length; i++)
-        // {
-        //     GameObject _Rules = Instantiate(cards, transform_Rules.position, Quaternion.identity);
-        //     _Rules.transform.SetParent(transform_Deck, false);
-        //     _Rules.GetComponent<UICards>().image_cards.sprite = LoadDeck.instance.rulesArr[i];
-        //     listCard.Add(_Rules);
-        // }
+        for (int i = 0; i < LoadDeck.instance.rulesArr.Length; i++)
+        {
+            GameObject _Rules = Instantiate(cards, transform_Rules.position, Quaternion.identity);
+            _Rules.transform.SetParent(transform_Deck, false);
+            _Rules.GetComponent<UICards>().image_cards.sprite = LoadDeck.instance.rulesArr[i];
+            listCard.Add(_Rules);
+        }
 
         GameObject _rules = Instantiate(cards, transform_Rules.position, Quaternion.identity);
         _rules.GetComponent<UICards>().image_cards.sprite = LoadDeck.instance.basicRules;
+        Rules.Add(_rules);
         Rules.Add(_rules);
 
 
@@ -127,7 +132,7 @@ public class GameController : MonoBehaviour
             int rdPlayer = Random.Range(0,listCard.Count-1);
             listCard[rdPlayer].transform.SetParent(playerZone.transform, true);
             //iTween.MoveTo(listCard[rdPlayer], iTween.Hash("position", playerZone, "easeType", "Linear", "loopType", "none", "time", 0.9f));
-            iTween.RotateBy(listCard[rdPlayer], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.2f));
+            iTween.RotateBy(listCard[rdPlayer], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.4f));
             //yield return new WaitForSeconds(0.25f);
             listCard[rdPlayer].GetComponent<UICards>().gob_FrontCard.SetActive(false);
             listCard[rdPlayer].GetComponent<UICards>().SetIsThisCardYours(true);
@@ -141,7 +146,7 @@ public class GameController : MonoBehaviour
             listCard[rdAI].transform.SetParent(enemyZone.transform, true);
             //iTween.MoveTo(listCard[rdAI], iTween.Hash("position", enemyZone, "easeType", "Linear", "loopType", "none", "time", 0.4f));
             iTween.RotateBy(listCard[rdAI], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.4f));
-            yield return new WaitForSeconds(0.25f);
+            //yield return new WaitForSeconds(0.25f);
             listCard[rdAI].GetComponent<UICards>().gob_FrontCard.SetActive(true);
             listCard.RemoveAt(rdAI);
         }
@@ -191,6 +196,7 @@ public class GameController : MonoBehaviour
                 playerTurn.SetActive(false);
                 enmeyTurn.SetActive(false);
                 StartCoroutine(waiter());
+                //Application.Quit();
             }
         }
         //Debug.Log("goal for player not met");
@@ -221,6 +227,7 @@ public class GameController : MonoBehaviour
                 playerTurn.SetActive(false);
                 enmeyTurn.SetActive(false);
                 StartCoroutine(waiter());
+                //Application.Quit();
                 
             }
         }
@@ -231,6 +238,12 @@ public class GameController : MonoBehaviour
     public IEnumerator waiter()
     {
         yield return new WaitForSeconds(3f);
+        Debug.Log("load main menu");
+        playerTurn.SetActive(false);
+        enmeyTurn.SetActive(false);
+        GameOverLoseUI.SetActive(false);
+        GameOverUI.SetActive(false);
+        Destroy(gameObject);
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -238,7 +251,13 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < cardsToDraw; i++)
         {
-            yield return new WaitForSeconds(.5f);
+            if(cardsToDraw == 1)
+            {
+                yield return new WaitForSeconds(2f);
+            }
+            else{
+                yield return new WaitForSeconds(.5f);
+            }
             int rdPlayer = Random.Range(0,listCard.Count-1);
             listCard[rdPlayer].transform.SetParent(playerZone.transform, true);
             iTween.RotateBy(listCard[rdPlayer], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.2f));
@@ -246,12 +265,20 @@ public class GameController : MonoBehaviour
             listCard[rdPlayer].GetComponent<UICards>().SetIsThisCardYours(true);
             listCard.RemoveAt(rdPlayer);
         }
+        playerTurn.SetActive(true);
+        enmeyTurn.SetActive(false);
     }
     public IEnumerator drawCardsForEnemy(int cardsToDraw)
     {
         for (int i = 0; i < cardsToDraw; i++)
         {
-            yield return new WaitForSeconds(1.5f);
+            if(cardsToDraw == 1)
+            {
+                yield return new WaitForSeconds(2f);
+            }
+            else{
+                yield return new WaitForSeconds(.5f);
+            }
             int AIRdCard = Random.Range(0,listCard.Count-1);
             listCard[AIRdCard].transform.SetParent(enemyZone.transform, true);
             iTween.RotateBy(listCard[AIRdCard], iTween.Hash("y", 0.5f, "easeType", "Linear", "loopType", "none", "time", 0.2f));
@@ -259,6 +286,8 @@ public class GameController : MonoBehaviour
             listCard[AIRdCard].GetComponent<UICards>().SetIsThisCardYours(false);
             listCard.RemoveAt(AIRdCard);
         }
+        playerTurn.SetActive(false);
+        enmeyTurn.SetActive(true);
     }
     private IEnumerator GameFlow()
     {
@@ -273,22 +302,21 @@ public class GameController : MonoBehaviour
             }
             case GameState.PlayerTurn:
             {
-                yield return new WaitForSeconds(2f);
+                if(currentPlayCardsRule > 1)
+                {
+                    yield return new WaitForSeconds(4f);
+                }
+                yield return new WaitForSeconds(3f);
                 //deal the number of cards corresponding to the current rules and play the number of cards corresponding to the rules
                 Debug.Log("playTurn");
-                enmeyTurn.SetActive(false);
-                playerTurn.SetActive(true);
                 StartCoroutine(drawCards(currentDrawCardsRule));
                 StartCoroutine(waitForTurn());
-                //currentGame.cardsPlayed = 0;
                 break;
             }
             case GameState.EnemeyTurn:
             {
                 //deal the number of cards corresponding to the current rules to the enmey and play the number of cards corresponding to the rules to the enemy
                 Debug.Log("enemys turn");
-                playerTurn.SetActive(false);
-                enmeyTurn.SetActive(true);
                 StartCoroutine(drawCardsForEnemy(currentDrawCardsRule));
                 StartCoroutine(AIPlay());
                 gameState = GameState.PlayerTurn;
@@ -301,12 +329,14 @@ public class GameController : MonoBehaviour
 
     IEnumerator waitForTurn()
     {
+        clickToggle = true;
         //10 second timer 
         for( float timer = 60 ; timer >= 0 ; timer -= Time.deltaTime )
         {
-            if(currentGame.cardsPlayed == currentPlayCardsRule)
+            if(currentGame.cardsPlayed >= currentPlayCardsRule)
             {
                 Debug.Log("played  turn over hopefully!");
+                clickToggle = false;
                 gameState = GameState.EnemeyTurn;
                 currentGame.cardsPlayed = 0;
                 CheckIfGoalIsMet();
@@ -323,26 +353,67 @@ public class GameController : MonoBehaviour
     IEnumerator AIPlay()
     {
 
-        yield return new WaitForSeconds(2f);
-        int AICardPlayed = Random.Range(0, enemyZone.transform.childCount - 1);
-
-        GameObject tempCard = enemyZone.transform.GetChild(AICardPlayed).gameObject;
-
-        if(enemyZone.transform.GetChild(AICardPlayed).GetComponent<UICards>().isGoal() == true)
+        if(currentDrawCardsRule == 1)
         {
-            //GameObject tempCard = enemyZone.transform.GetChild(AICardPlayed).gameObject;
-            transform_Goal.GetChild(0).transform.SetParent(transform_discard, false);
-            currentGoal.GetComponent<UICards>().gob_FrontCard.SetActive(true); 
-            enemyZone.transform.GetChild(AICardPlayed).SetParent(transform_Goal, false);
-            currentGoal = tempCard;
-            currentGoal.transform.Rotate(0,-180,0);
+            yield return new WaitForSeconds(4f);
         }
         else{
-            enemyZone.transform.GetChild(AICardPlayed).SetParent(enemyKeeperArea.transform, false);
+            yield return new WaitForSeconds(2.5f);
         }
+        for (int i = 0; i < currentPlayCardsRule; i++)
+        {
+            int AICardPlayed = Random.Range(0, enemyZone.transform.childCount - 1);
 
-        tempCard.GetComponent<UICards>().gob_FrontCard.SetActive(false);
-        CheckIfGoalIsMetForEnemy();
-        yield return new WaitForSeconds(.5f);
+            GameObject tempCard = enemyZone.transform.GetChild(AICardPlayed).gameObject;
+
+            if(enemyZone.transform.GetChild(AICardPlayed).GetComponent<UICards>().isGoal() == true)
+            {
+                //GameObject tempCard = enemyZone.transform.GetChild(AICardPlayed).gameObject;
+                transform_Goal.GetChild(0).transform.SetParent(transform_discard, false);
+                currentGoal.GetComponent<UICards>().gob_FrontCard.SetActive(true); 
+                enemyZone.transform.GetChild(AICardPlayed).SetParent(transform_Goal, false);
+                currentGoal = tempCard;
+                currentGoal.transform.Rotate(0,-180,0);
+            }
+            else if(enemyZone.transform.GetChild(AICardPlayed).GetComponent<UICards>().isRule() == true)
+            {
+                if(tempCard.GetComponent<UICards>().isPlayCard() == true)
+                {
+                    Rules[0].GetComponent<UICards>().gob_FrontCard.SetActive(true);
+                    Rules[0].transform.SetParent(transform_discard, false);
+                    Rules[0] = tempCard;
+                    tempCard.transform.SetParent(transform_Rules, false);
+                }
+                else{
+                    Rules[1].GetComponent<UICards>().gob_FrontCard.SetActive(true);
+                    Rules[1].transform.SetParent(transform_discard, false);
+                    Rules[1] = tempCard;
+                    tempCard.transform.SetParent(transform_RulePlay, false);
+                }
+                
+                int play, draw;
+                play = tempCard.GetComponent<UICards>().getPlayRule();
+                draw = tempCard.GetComponent<UICards>().getDrawRules();
+
+                if(play > 1)
+                {
+                    currentPlayCardsRule = play;
+                    Debug.Log("play "+ play);
+                }
+                if(draw > 1)
+                {
+                    currentDrawCardsRule = draw;
+                    Debug.Log("draw "+ draw);
+                }
+                tempCard.transform.Rotate(0, -180, 0);
+            }
+            else{
+                enemyZone.transform.GetChild(AICardPlayed).SetParent(enemyKeeperArea.transform, false);
+            }
+            tempCard.GetComponent<UICards>().gob_FrontCard.SetActive(false);
+            CheckIfGoalIsMetForEnemy();
+            yield return new WaitForSeconds(1f);
+        }
+        yield return new WaitForSeconds(1f);
     }
 }

@@ -54,19 +54,23 @@ public class CardZoom : MonoBehaviour
 
     public void clicked()
     {
-      
-            if(gameObject.GetComponent<UICards>().isKeeper() && gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
+      if(GameController.currentGame.clickToggle == false)
+      {
+          Debug.Log("no clicky here");
+      }
+      else{
+          if(gameObject.GetComponent<UICards>().isKeeper() && gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
             {
                 gameObject.transform.SetParent(keeperArea.transform, false);
                 GameController.currentGame.cardsPlayed++;
             }
-            if(gameObject.GetComponent<UICards>().isKeeper() && !gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
-            {
-                gameObject.transform.SetParent(enemyKeeperArea.transform, false);
-                GameController.currentGame.enemeyCardsPlayed++;
-            }
+            // if(gameObject.GetComponent<UICards>().isKeeper() && !gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
+            // {
+            //     gameObject.transform.SetParent(enemyKeeperArea.transform, false);
+            //     GameController.currentGame.enemeyCardsPlayed++;
+            // }
     
-            if(gameObject.GetComponent<UICards>().isGoal())
+            if(gameObject.GetComponent<UICards>().isGoal() && gameObject.GetComponent<UICards>().CheckIfThisCardIsYours())
             {
                 GameController.currentGame.currentGoal.transform.SetParent(GameController.currentGame.transform_discard, false);
                 GameController.currentGame.currentGoal.GetComponent<UICards>().gob_FrontCard.SetActive(true);             
@@ -77,15 +81,38 @@ public class CardZoom : MonoBehaviour
             }
             if(gameObject.GetComponent<UICards>().isRule())
             {
-                GameController.currentGame.currentDrawCardsRule = gameObject.GetComponent<UICards>().getDrawRules();
-                GameController.currentGame.Rules[0].transform.SetParent(GameController.currentGame.transform_discard, false);
-                gameObject.transform.SetParent(GameController.currentGame.transform_Rules, false);
+                gameObject.transform.Rotate(0,-180, 0);
+                int play, draw;
+                play = gameObject.GetComponent<UICards>().getPlayRule();
+                draw = gameObject.GetComponent<UICards>().getDrawRules();
+                if(play > 0)
+                {
+                    GameController.currentGame.currentPlayCardsRule = play;
+
+                }
+                if(draw > 0)
+                {
+                    GameController.currentGame.currentDrawCardsRule = draw;
+                }
+                if(gameObject.GetComponent<UICards>().isPlayCard() == true)
+                {
+                    GameController.currentGame.Rules[0].GetComponent<UICards>().gob_FrontCard.SetActive(true);
+                    GameController.currentGame.Rules[0].transform.SetParent(GameController.currentGame.transform_discard, false);
+                    gameObject.transform.SetParent(GameController.currentGame.transform_Rules, false);
+                    GameController.currentGame.Rules[0] = gameObject;
+                }
+                else
+                {
+                    GameController.currentGame.Rules[1].GetComponent<UICards>().gob_FrontCard.SetActive(true);
+                    GameController.currentGame.Rules[1].transform.SetParent(GameController.currentGame.transform_discard, false);
+                    gameObject.transform.SetParent(GameController.currentGame.transform_RulePlay, false);
+                    GameController.currentGame.Rules[1] = gameObject;
+                }
+                
                 GameController.currentGame.cardsPlayed++;
 
             }
-
             gameObject.GetComponent<UICards>().SetIsThisCardYours(false);
-
-        
+      }   
     }
 }

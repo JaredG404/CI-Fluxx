@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 16aeedee91d05b3838faa810f337d7d2
   - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 3bef43fdc516d8226bd2f39d81ad9417
+  - enabled: 1
     path: Assets/Scenes/Deck.unity
     guid: c4ebc849433ec01c38848f171f8c739f
   - enabled: 1
@@ -27,6 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Deck_Actions.unity
     guid: 1e6e573c24196bf4aaf1badd5d263327
   - enabled: 1
-    path: Assets/Scenes/Game.unity
+    path: Assets/Plugins/GameDemo.unity
     guid: d516bb19fbcb5ecffac330c4235817e9
   m_configObjects: {}

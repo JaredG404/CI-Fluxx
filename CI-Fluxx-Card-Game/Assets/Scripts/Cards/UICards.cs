@@ -21,7 +21,7 @@ public class UICards : MonoBehaviour
     public string keepersNeededforGoal4;
     public string keepersNeededforGoal5;
 
-    private int drawRule, playRule, limitRule;
+    public int drawRule, playRule, limitRule;
     public bool isThisCardYours = false;
     // Start is called before the first frame update
     void Start()
@@ -38,13 +38,12 @@ public class UICards : MonoBehaviour
         {
             type = CardType.GOALS;
         }
-        else
+        else if(string.Compare(str, "rule") == 0)
         {
             type = CardType.RULE;
         }
         KeepersForTheGoal();
         RulesCardsRule();
-
     }
 
     // Update is called once per frame
@@ -175,16 +174,28 @@ public class UICards : MonoBehaviour
     {
         if(isRule())
         {
-            if(string.Compare(Name, "Draw2") == 0)
+            if(string.Compare(Name, "rule-Draw2") == 0)
             {
                 drawRule = 2;
                 playRule = -1;// null
                 limitRule = -1;//null
             }
-            else if(string.Compare(Name, "Draw3") == 0)
+            if(string.Compare(Name, "rule-Draw3") == 0)
             {
                 drawRule = 3;
                 playRule = -1;// null
+                limitRule = -1;//null
+            }
+            if(string.Compare(Name, "rule-Play2") == 0)
+            {
+                drawRule = -1; //null
+                playRule = 2;
+                limitRule = -1;//null
+            }
+            if(string.Compare(Name, "rule-Play3") == 0)
+            {
+                drawRule = -1; //null
+                playRule = 3;
                 limitRule = -1;//null
             }
         }
@@ -209,6 +220,13 @@ public class UICards : MonoBehaviour
     public int getPlayRule()
     {
         return playRule;
+    }
+    public bool isPlayCard()
+    {
+        if(playRule > 0)
+            return true;
+        else
+            return false;
     }
     public int getLimitRule()
     {
